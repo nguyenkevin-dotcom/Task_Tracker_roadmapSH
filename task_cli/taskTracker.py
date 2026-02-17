@@ -3,27 +3,15 @@ from datetime import datetime
 
 dataManipulation = jsonFile.DataManipulation()
 
+
 class Task:
-    def __init__(self, id: int, desc: str):
-        """
-        Setting the structure for Tasks
-        
-        :param self: Description
-        :param id: Description
-        :type id: int
-        :param desc: Description
-        :type desc: str
-        """
-        self.id = id
-        self.desc = desc
-        self.status = ['todo', 'in-progress', 'done']
-        self.createdAt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.updatedAt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    def __init__(self):
+        self.status = ["todo", "in-progress", "done"]
 
     def add(self, desc: str):
         """
         Adding new task into the JSON file
-        
+
         :param self: Description
         :param desc: Description
         :type desc: str
@@ -37,13 +25,19 @@ class Task:
             "id": new_id,
             "description": desc,
             "status": self.status[0],
-            "createdAt": self.createdAt,
-            "updatedAt": self.updatedAt
+            "createdAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "updatedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         }
-        # Appending new Task to 
+        # Appending new Task to
         data.append(record)
-
         dataManipulation.insert_into_JSON(data)
 
         print(f"Task added successfully (ID: {new_id})")
 
+    def update(self, id: int, updatedDesc: str):
+        data = dataManipulation.read_everything()
+        for i in range(len(data)):
+            if data[i]["id"] == id:
+                data[i]["description"] = updatedDesc
+                data[i]["updatedAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        dataManipulation.insert_into_JSON(data)
