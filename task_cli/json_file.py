@@ -1,3 +1,16 @@
+# Copyright (c) 2026 nguyenkevin-dotcom
+#
+# -*- coding:utf-8 -*-
+# @Script: json_file.py
+# @Author: nguyenkevin-dotcom
+# @Email: nguk0907@gmail.com
+# @Create At: 2026-02-19 00:24:15
+# @Last Modified By: nguyenkevin-dotcom
+# @Last Modified At: 2026-02-19 00:33:50
+# @Description: This file focus on operations with JSON file. It consists of 
+# reading a JSON and inserting new values to existing JSON file. 
+# If JSON file does exit the program will create one.
+
 import json
 import os
 
