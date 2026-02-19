@@ -2,3 +2,4 @@
 task_cli.egg-info
 task_tracker.egg-info
 tasks.json
+.DS_store
