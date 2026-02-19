@@ -1,13 +1,13 @@
 # Copyright (c) 2026 nguyenkevin-dotcom
 #
 # -*- coding:utf-8 -*-
-# @Script: json_file.py
+# @Script: __main__.py
 # @Author: nguyenkevin-dotcom
 # @Email: nguk0907@gmail.com
 # @Create At: 2026-02-19 00:22:10
 # @Last Modified By: nguyenkevin-dotcom
-# @Last Modified At: 2026-02-19 00:26:51
-# @Description: This file focus on CLI operations. For implementing cli behavior 
+# @Last Modified At: 2026-02-19 16:55:41
+# @Description: This file focus on CLI operations. For implementing cli behavior
 # in this I am using argparse from standard python library.
 
 import argparse

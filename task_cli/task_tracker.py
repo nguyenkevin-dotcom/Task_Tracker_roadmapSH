@@ -1,15 +1,15 @@
 # Copyright (c) 2026 nguyenkevin-dotcom
 #
 # -*- coding:utf-8 -*-
-# @Script: task_tracker.py
+# @Script: json_file.py.py
 # @Author: nguyenkevin-dotcom
 # @Email: nguk0907@gmail.com
 # @Create At: 2026-02-19 00:26:45
 # @Last Modified By: nguyenkevin-dotcom
-# @Last Modified At: 2026-02-19 00:48:00
-# @Description: This file works with commands of Task Tracker project. 
-# Trying to handle edge cases and errors. 
-# For creating and formatting date and time I am using 
+# @Last Modified At: 2026-02-19 16:55:50
+# @Description: This file works with commands of Task Tracker project.
+# Trying to handle edge cases and errors.
+# For creating and formatting date and time I am using
 # from standard python library datetime.
 
 from task_cli import json_file
@@ -17,6 +17,7 @@ from datetime import datetime
 
 # Getting the function from class DataManipulation
 dataManipulation = json_file.DataManipulation()
+
 
 class Task:
     def __init__(self):
@@ -51,11 +52,13 @@ class Task:
                 print(
                     "The description can't be named same as previously created Tasks."
                 )
-                return 
+                return
 
         if len(desc) > 13:
-            print("The text of description is too long! The maximum number of characters is 13.")
-            return 
+            print(
+                "The text of description is too long! The maximum number of characters is 13."
+            )
+            return
         # Record of the new task
         record = {
             "id": new_id,
@@ -73,7 +76,7 @@ class Task:
     def update(self, id: int, updatedDesc: str):
         """
         Update the description of existing tasks.
-        
+
         :param self: Description
         :param id: Description
         :type id: int
@@ -86,18 +89,18 @@ class Task:
                 if data[i]["description"] == updatedDesc:
                     print("The description is same as the current one.")
                     return
-                else: 
+                else:
                     data[i]["description"] = updatedDesc
                     data[i]["updatedAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     dataManipulation.insert_into_JSON(data)
                     print(f"The description of task (ID: {id}) has been changed.")
-                    return 
+                    return
         print(f"The task (ID: {id}) does not exist.")
-        
+
     def delete(self, id: int):
         """
         Delete tasks by their id.
-        
+
         :param self: Description
         :param id: Description
         :type id: int
@@ -109,12 +112,12 @@ class Task:
                 print(f"The task (ID: {id}) has been deleted.")
                 dataManipulation.insert_into_JSON(data)
                 return
-        print(f"The task (ID: {id}) does not exist or has been already deleted.") 
+        print(f"The task (ID: {id}) does not exist or has been already deleted.")
 
     def mark_in_progress(self, id: int):
         """
         Set label status to [ in-progress ].
-        
+
         :param self: Description
         :param id: Description
         :type id: int
@@ -124,19 +127,19 @@ class Task:
             if task["id"] == id:
                 if task["status"] == self.status[1]:
                     print(f"The task has already been set to [ {self.status[1]} ]")
-                    return 
+                    return
                 elif task["status"] != self.status[1]:
                     task["status"] = self.status[1]
                     task["updatedAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     dataManipulation.insert_into_JSON(data)
                     print(f"The task (ID: {id}) is set to [ {self.status[1]} ]")
-                    return 
+                    return
         print(f"The task (ID: {id}) does not exist")
 
     def mark_done(self, id: int):
         """
         Set label status to [ done ].
-        
+
         :param self: Description
         :param id: Description
         :type id: int
@@ -146,18 +149,18 @@ class Task:
             if task["id"] == id:
                 if task["status"] == self.status[2]:
                     print(f"The task has already been set to [ {self.status[2]} ]")
-                    return 
+                    return
                 elif task["status"] != self.status[2]:
                     task["status"] = self.status[2]
                     task["updatedAt"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     dataManipulation.insert_into_JSON(data)
                     print(f"The task (ID: {id}) is set to [ {self.status[2]} ]")
-                    return 
+                    return
         print(f"The task (ID: {id}) does not exist")
 
     def list(self, *items):
         """
-        List tasks, it is also possible to list tasks based by their status. 
+        List tasks, it is also possible to list tasks based by their status.
 
         Possible commands:
         task-cli list => prints every existing task
@@ -287,7 +290,9 @@ class Task:
                 )
                 print(formatted_row)
         else:
-            status_options = " | ".join(f"{self.status[i]}" for i in range(len(self.status)))
+            status_options = " | ".join(
+                f"{self.status[i]}" for i in range(len(self.status))
+            )
             print(
                 f"!! The only arguments the list command takes are [ {status_options} ]"
             )
